@@ -310,3 +310,13 @@ func TestExportStopsOnUnreadableBlob(t *testing.T) {
 		t.Fatal("an unreadable blob was skipped silently")
 	}
 }
+
+func TestFooterLinksToSource(t *testing.T) {
+	s := newServer(fixtureIndex(t), t.TempDir(), options{})
+	for lang, label := range map[string]string{"en": "Source code", "zh-TW": "原始碼", "zh-CN": "源代码"} {
+		_, body := get(t, s, "/"+lang+"/about")
+		if !strings.Contains(body, `<a href="`+sourceURL+`" rel="noopener">`+label+`</a>`) {
+			t.Errorf("%s: footer has no source link", lang)
+		}
+	}
+}

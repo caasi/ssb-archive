@@ -11,6 +11,10 @@ import (
 	"time"
 )
 
+// sourceURL is where the program's code is. A fork that runs its own site
+// changes this line.
+const sourceURL = "https://github.com/caasi/ssb-archive"
+
 const (
 	perPage        = 50
 	perAuthorsPage = 100
@@ -280,6 +284,7 @@ var pages = template.Must(template.New("").Funcs(template.FuncMap{
 	"blobURL":   blobURL,
 	"add":       func(a, b int) int { return a + b },
 	"t":         tr,
+	"source":    func() string { return sourceURL },
 	"languages": func() []language { return languages },
 }).Parse(pageTemplates))
 
@@ -294,7 +299,7 @@ const pageTemplates = `
 <body><header class="top"><nav class="nav"><a href="/{{.Lang}}/"{{if eq .Nav "recent"}} class="selected" aria-current="page"{{end}}>{{t .Lang "nav.recent"}}</a><a href="/{{.Lang}}/authors"{{if eq .Nav "authors"}} class="selected" aria-current="page"{{end}}>{{t .Lang "nav.authors"}}</a><a href="/{{.Lang}}/about"{{if eq .Nav "about"}} class="selected" aria-current="page"{{end}}>{{t .Lang "nav.about"}}</a></nav>
 <nav class="langs">{{range languages}}{{if eq .Code $.Lang}}<span aria-current="true">{{.Name}}</span>{{else}}<a href="/{{.Code}}{{$.Back}}" hreflang="{{.Code}}" lang="{{.Code}}">{{.Name}}</a>{{end}} {{end}}</nav></header><main>{{end}}
 
-{{define "foot"}}</main><footer>{{t .Lang "foot"}}</footer></body></html>{{end}}
+{{define "foot"}}</main><footer>{{t .Lang "foot"}} <a href="{{source}}" rel="noopener">{{t .Lang "foot.source"}}</a></footer></body></html>{{end}}
 
 {{define "pager"}}{{with .Pager}}{{if gt .Pages 1}}<nav class="pager" aria-label="{{t $.Lang "pager.label"}}">
 {{if .First}}<a href="{{.First}}">{{t $.Lang "pager.first"}}</a> <a href="{{.Prev}}" rel="prev">{{t $.Lang "pager.prev"}}</a>{{end}}
