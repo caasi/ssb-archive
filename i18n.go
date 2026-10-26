@@ -73,6 +73,7 @@ func tr(lang, key string, args ...any) template.HTML {
 
 var catalog = map[string]map[string]string{
 	"en": {
+		"foot.source":           "Source code",
 		"self.done.show.denied": "Recorded. The operator hides this account on this site, so it stays hidden.",
 		"link.missing":          "Not in this archive", "title.missing": "Not in this archive", "missing.body": "The archive does not have this. The pub never received it, or it was not a post.",
 		"about.private":        "This is the private view of the archive. It shows every account, also the accounts that did not agree to be shown on the web. Do not copy its pages to a public place.",
@@ -120,6 +121,7 @@ var catalog = map[string]map[string]string{
 		"authors.total": "%d accounts, most posts first.", "authors.posts": "(%d posts)", "authors.none": "No authors match.",
 	},
 	"zh-TW": {
+		"foot.source":           "原始碼",
 		"self.done.show.denied": "已記錄。不過站方在這個網站隱藏了這個帳號，所以它仍然不會公開。",
 		"link.missing":          "這個封存裡沒有", "title.missing": "封存裡沒有", "missing.body": "這個封存沒有這筆資料。可能 pub 從來沒收到，或它不是一篇貼文。",
 		"about.private":        "這是封存的私網版，會顯示所有帳號，包括沒有同意公開在網頁上的帳號。不要把這裡的頁面轉貼到公開的地方。",
@@ -167,6 +169,7 @@ var catalog = map[string]map[string]string{
 		"authors.total": "共 %d 個帳號，貼文多的排前面。", "authors.posts": "（%d 篇貼文）", "authors.none": "沒有符合的作者。",
 	},
 	"zh-CN": {
+		"foot.source":           "源代码",
 		"self.done.show.denied": "已记录。不过站长在这个网站隐藏了这个账号，所以它仍然不会公开。",
 		"link.missing":          "这个存档里没有", "title.missing": "存档里没有", "missing.body": "这个存档没有这条资料。可能 pub 从来没收到，或它不是一篇帖子。",
 		"about.private":        "这是存档的私网版，会显示所有账号，包括没有同意公开在网页上的账号。不要把这里的页面转贴到公开的地方。",
