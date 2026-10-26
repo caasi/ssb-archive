@@ -1,0 +1,26 @@
+# systemd unit for ssb-archive.
+# Copy the binary to /usr/local/bin and this file to /etc/systemd/system,
+# then change -data and -listen in ExecStart for your host.
+[Unit]
+Description=Read-only web archive of Secure Scuttlebutt data
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/ssb-archive -data /srv/ssb-archive/ssb-pub-data -listen 127.0.0.1:8807
+# For a public site, add for example:
+#   -public -site https://archive.example -state /var/lib/ssb-archive/consent.json -contact you@example.org
+# The data is read-only. The only writable path is the state directory,
+# which systemd creates for the temporary user.
+StateDirectory=ssb-archive
+DynamicUser=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+NoNewPrivileges=yes
+ReadOnlyPaths=/srv/ssb-archive
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
